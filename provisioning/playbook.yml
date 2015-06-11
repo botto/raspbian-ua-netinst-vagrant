@@ -1,0 +1,21 @@
+---
+
+- hosts: all
+  gather_facts: yes
+  tasks:
+    - name: Install deps
+      sudo: yes
+      apt: name="{{ item }}" state="present"
+      with_items:
+        - git
+        - curl
+        - zip
+        - xz-utils
+        - gnupg
+        - kpartx
+        - dosfstools
+        - binutils
+    - name: Get repo
+      git: repo=https://github.com/debian-pi/raspbian-ua-netinst.git dest=/home/vagrant/rpi-ua-inst
+      sudo: yes
+      sudo_user: vagrant
