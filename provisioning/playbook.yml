@@ -3,6 +3,9 @@
 - hosts: all
   gather_facts: yes
   tasks:
+    - name: Update packages
+      sudo: yes
+      apt: upgrade=safe update_cache=yes
     - name: Install deps
       sudo: yes
       apt: name="{{ item }}" state="present"
